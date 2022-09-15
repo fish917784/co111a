@@ -15,4 +15,68 @@ CHIP Mux16 {
 
     PARTS:
     // Put your code here:
+    Nand(a=sel,b=sel,out=notsel);
+    Nand(a=a[0],b=notsel,out=a0notsel);
+    Nand(a=a0notsel,b=a0notsel,out=nota0notsel);
+    Nand(a=b[0],b=sel,out=notb0sel);
+    Nand(a=notb0sel,b=notb0sel,out=b0sel);
+    Nand(a=nota0notsel,b=notan0otsel,out=na0notsel);
+    Nand(a=b0sel,b=b0sel,out=nb0sel);
+    Nand(a=na0notsel,b=nb0sel,out=out[0]);
+
+    Nand(a=a[1],b=notsel,out=a1notsel);
+    Nand(a=a1notsel,b=a1notsel,out=nota1notsel);
+    Nand(a=b[1],b=sel,out=notb1sel);
+    Nand(a=notb1sel,b=notb1sel,out=b1sel);
+    Nand(a=nota1notsel,b=notan1otsel,out=na1notsel);
+    Nand(a=b1sel,b=b1sel,out=nb1sel);
+    Nand(a=na1notsel,b=nb1sel,out=out[1]);
+
+    Nand(a=a[2],b=notsel,out=a2notsel);
+    Nand(a=a2notsel,b=a2notsel,out=nota2notsel);
+    Nand(a=b[2],b=sel,out=notb2sel);
+    Nand(a=notb2sel,b=notb2sel,out=b2sel);
+    Nand(a=nota2notsel,b=notan2otsel,out=na2notsel);
+    Nand(a=b2sel,b=b2sel,out=nb2sel);
+    Nand(a=na2notsel,b=nb2sel,out=out[2]);
+
+    Nand(a=a[3],b=notsel,out=a3notsel);
+    Nand(a=a3notsel,b=a3notsel,out=nota3notsel);
+    Nand(a=b[3],b=sel,out=notb3sel);
+    Nand(a=notb3sel,b=notb3sel,out=b3sel);
+    Nand(a=nota3notsel,b=notan3otsel,out=na3notsel);
+    Nand(a=b3sel,b=b3sel,out=nb3sel);
+    Nand(a=na3notsel,b=nb3sel,out=out[3]);
+
+    Nand(a=a[4],b=notsel,out=a4notsel);
+    Nand(a=a4notsel,b=a4notsel,out=nota4notsel);
+    Nand(a=b[4],b=sel,out=notb4sel);
+    Nand(a=notb4sel,b=notb4sel,out=b4sel);
+    Nand(a=nota4notsel,b=notan4otsel,out=na4notsel);
+    Nand(a=b4sel,b=b4sel,out=nb4sel);
+    Nand(a=na4notsel,b=nb4sel,out=out[4]);
+
+    Nand(a=a[5],b=notsel,out=a5notsel);
+    Nand(a=a5notsel,b=a5notsel,out=nota5notsel);
+    Nand(a=b[5],b=sel,out=notb5sel);
+    Nand(a=notb5sel,b=notb5sel,out=b5sel);
+    Nand(a=nota5notsel,b=notan5otsel,out=na5notsel);
+    Nand(a=b5sel,b=b5sel,out=nb5sel);
+    Nand(a=na5notsel,b=nb5sel,out=out[5]);
+
+    Nand(a=a[6],b=notsel,out=a6notsel);
+    Nand(a=a6notsel,b=a6notsel,out=nota6notsel);
+    Nand(a=b[6],b=sel,out=notb6sel);
+    Nand(a=notb6sel,b=notb6sel,out=b6sel);
+    Nand(a=nota6notsel,b=notan6otsel,out=na6notsel);
+    Nand(a=b6sel,b=b6sel,out=nb6sel);
+    Nand(a=na6notsel,b=nb6sel,out=out[6]);
+
+    Nand(a=a[7],b=notsel,out=a7notsel);
+    Nand(a=a7notsel,b=a7notsel,out=nota7notsel);
+    Nand(a=b[7],b=sel,out=notb7sel);
+    Nand(a=notb7sel,b=notb7sel,out=b7sel);
+    Nand(a=nota7notsel,b=notan7otsel,out=na7notsel);
+    Nand(a=b7sel,b=b7sel,out=nb7sel);
+    Nand(a=na7notsel,b=nb7sel,out=out[7]);
 }
