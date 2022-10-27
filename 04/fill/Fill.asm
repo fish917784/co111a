@@ -13,8 +13,6 @@
 
 // Put your code here.
 (LOOP)
-@0
-M=D
 @8191
 D=A
 @1
@@ -30,29 +28,27 @@ D;JEQ
 @1
 D=M
 @24575
-M=0
 A=A-D
 M=0
 @1
 M=M-1
 D=M
 @POS
-D;JGT
+D;JGE
 @LOOP
-D;JEQ
+D;JLT
 @LOOP
 0;JMP
 (END)
 @1
 D=M
 @24575
-M=-1
 A=A-D
 M=-1
 @1
 M=M-1
 D=M
 @END
-D;JGT
+D;JGE
 @LOOP
-D;JEQ
+D;JLT
