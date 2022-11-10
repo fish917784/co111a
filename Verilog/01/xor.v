@@ -1,16 +1,16 @@
 `include "ch01.v"
 
-module nandtest;
+module xor_test;
 reg a,b;
-wire ab;
+wire out;
 
-Nand g (a, b, ab);
+Xor g(a,b,out);
 
 initial
 begin
     a=0;
     b=0;
-    $monitor("%4dns Nand: a=%d b=%d out=%d", $stime, a, b, ab);
+    $monitor("%4dns Xor: a=%d b=%d out=%d",$stime, a,b,out);
 end
 
 always #50 begin
