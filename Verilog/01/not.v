@@ -1,5 +1,5 @@
 module Not(input in, output out);
-    not (out, in);
+    nand (out, in,in);
 endmodule
 
 module not_test;
@@ -18,6 +18,6 @@ always #50 begin
     in=in+1;
 end
 
-initial #200 $finish;
+initial #150 $finish;
 
 endmodule

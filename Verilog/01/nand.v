@@ -23,6 +23,6 @@ always #100 begin
     b=b+1;
 end
 
-initial #500 $finish;
+initial #150 $finish;
 
 endmodule
