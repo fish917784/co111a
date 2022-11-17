@@ -121,3 +121,24 @@ module Mux16(input[15:0]a,b,input sel,output[15:0] out);
     Mux g14(a[14],b[14],sel,out[14]);
     Mux g15(a[15],b[15],sel,out[15]);
 endmodule
+
+module Mux4Way16(input[15:0] a,b,c,d,input[1:0] sel,output[15:0] out);
+    wire[15:0] ab,cd;
+    Mux16 g0(a,b,sel[0],ab);
+    Mux16 g1(c,d,sel[0],cd);
+    Mux16 g2(ab,cd,sel[1],out);
+endmodule
+
+module Mux8Way16(input[15:0] a,b,c,d,e,f,g,h,input[2:0] sel,output[15:0] out);
+    wire[15:0] abcd,efgh;
+    Mux4Way16 g0(a,b,c,d,sel[1:0],abcd);
+    Mux4Way16 g1(e,f,g,h,sel[1:0],efgh);
+    Mux16 g2(abcd,efgh,sel[2],out);
+endmodule
+
+module DMux(input in,sel,output a,b);
+    wire notsel;
+    And g0(in,sel,b);
+    Not g1(sel,notsel);
+    And g2(notsel,in,a);
+endmodule
