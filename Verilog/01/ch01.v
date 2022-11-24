@@ -142,3 +142,17 @@ module DMux(input in,sel,output a,b);
     Not g1(sel,notsel);
     And g2(notsel,in,a);
 endmodule
+
+module DMux4Way(input in,input[1:0] sel,output a,b,c,d);
+    wire m0,m1;
+    DMux g0(in,sel[0],m0,m1);
+    DMux g1(m0,sel[1],a,c);
+    DMux g2(m1,sel[1],b,d);
+endmodule
+
+module DMux8Way(input in,input[2:0] sel,output a,b,c,d,e,f,g,h);
+    wire m0,m1;
+    DMux g0(in,sel[2],m0,m1);
+    DMux4Way g1(m0,sel[1:0],a,b,c,d);
+    DMux4Way g2(m1,sel[1:0],e,f,g,h);
+endmodule
