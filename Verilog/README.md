@@ -6,3 +6,4 @@ vvp 輸出檔名
 iverilog -o and and.v  
 vvp and
 ```
+元件都寫在 `chXX.v` 裡面，其他都是測試檔。
