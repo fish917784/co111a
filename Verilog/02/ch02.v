@@ -51,3 +51,31 @@ module Inc16(input[15:0] in,output[15:0] out);
     HalfAdder g14(in[14],s14,out[14],s15);
     HalfAdder g15(in[15],s15,out[15],s16);
 endmodule
+
+module ALU(input[15:0]x,y, input zx,nx,zy,ny,f,no, output[15:0] out, output zr,ng);
+    wire[15:0] xzx,nxzx,xnx,yzy,nyzy,yny,xplusy,xandy,afterf,nafterf,nof;
+    wire nzr8,nzr16,nzr;
+
+    Mux16 g0(x,16'b0,zx,xzx);
+    Not16 g1(xzx,nxzx);
+    Mux16 g2(xzx,nxzx,nx,xnx);
+
+    Mux16 g3(y,16'b0,zy,yzy);
+    Not16 g4(yzy,nyzy);
+    Mux16 g5(yzy,nyzy,ny,yny);
+
+    Add16 g6(xnx,yny,xplusy);
+    And16 g7(xnx,yny,xandy);
+    Mux16 g8(xandy,xplusy,f,afterf);
+
+    Not16 g9(afterf,nafterf);
+    Mux16 g10(afterf,nafterf,no,nof);
+    And16 g11(nof,nof,out);
+
+    Or8Way g12(nof[7:0],nzr8);
+    Or8Way g13(nof[15:8],nzr16);
+    Or g14(nzr8,nzr16,nzr);
+    Not g15(nzr,zr);
+
+    Mux g16(0,1,nof[15],ng);
+endmodule
