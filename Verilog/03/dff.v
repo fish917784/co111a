@@ -17,4 +17,10 @@ always #2 begin
 	clock=~clock;
 end
 
+always #4 begin
+	in=in+1;
+end
+
+initial #10 $finish;
+
 endmodule
