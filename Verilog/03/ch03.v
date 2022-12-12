@@ -49,3 +49,37 @@ module RAM8(input[15:0] in, input[2:0] address, input clock, load, output[15:0] 
 
     Mux8Way16 g9(o0, o1, o2, o3, o4, o5, o6, o7, address, out);
 endmodule
+
+module RAM64(input[15:0] in, input[5:0] address, input clock, load, output[15:0] out);
+    wire[15:0] o0, o1, o2, o3, o4, o5, o6, o7;
+
+    DMux8Way g0(load, address[5:3], r0, r1, r2, r3, r4, r5, r6, r7);
+
+    RAM8 g1(in, address[2:0], clock, r0, o0);
+    RAM8 g2(in, address[2:0], clock, r1, o1);
+    RAM8 g3(in, address[2:0], clock, r2, o2);
+    RAM8 g4(in, address[2:0], clock, r3, o3);
+    RAM8 g5(in, address[2:0], clock, r4, o4);
+    RAM8 g6(in, address[2:0], clock, r5, o5);
+    RAM8 g7(in, address[2:0], clock, r6, o6);
+    RAM8 g8(in, address[2:0], clock, r7, o7);
+
+    Mux8Way16 g9(o0, o1, o2, o3, o4, o5, o6, o7, address[5:3], out);
+endmodule
+
+module RAM512(input[15:0] in, input[8:0] address, input clock, load, output[15:0] out);
+    wire[15:0] o0, o1, o2, o3, o4, o5, o6, o7;
+
+    DMux8Way g0(load, address[8:6], r0, r1, r2, r3, r4, r5, r6, r7);
+
+    RAM64 g1(in, address[5:0], clock, r0, o0);
+    RAM64 g2(in, address[5:0], clock, r1, o1);
+    RAM64 g3(in, address[5:0], clock, r2, o2);
+    RAM64 g4(in, address[5:0], clock, r3, o3);
+    RAM64 g5(in, address[5:0], clock, r4, o4);
+    RAM64 g6(in, address[5:0], clock, r5, o5);
+    RAM64 g7(in, address[5:0], clock, r6, o6);
+    RAM64 g8(in, address[5:0], clock, r6, o7);
+
+    Mux8Way16 g9(o0, o1, o2, o3, o4, o5, o6, o7, address[8:6], out);
+endmodule

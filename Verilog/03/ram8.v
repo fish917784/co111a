@@ -13,17 +13,21 @@ initial begin
     load=0;
     in=15;
     $monitor("%4dns in=%d clock=%d load=%d address=%d out=%d", $stime, in, clock, load, address, out);
-    #12;
-    
-    #13;
-    address=2;
-    #14 address=3;
-    #15 address=4;
-    #16 address=5;
-    #17 address=6;
-    #18 address=7;
+    #4;
+    load=1;
+    address=4;
+    #2;
+    load=0;
+    address=0;
+    #2 address=1;
+    #2 address=2;
+    #2 address=3;
+    #2 address=4;
+    #2 address=5;
+    #2 address=6;
+    #2 address=7;
 end
-
+/*
 initial #4 begin
     address=5;
     load=1;
@@ -61,7 +65,7 @@ end
 initial #20 begin
     address=7;
 end
-
+*/
 always #1 begin
     clock=~clock;
 end
