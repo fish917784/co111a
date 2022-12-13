@@ -83,3 +83,13 @@ module RAM512(input[15:0] in, input[8:0] address, input clock, load, output[15:0
 
     Mux8Way16 g9(o0, o1, o2, o3, o4, o5, o6, o7, address[8:6], out);
 endmodule
+
+module RAM4K(input[15:0] in, input[11:0] address, input clock, load, output[15:0] out);
+    reg[15:0] m[0:2**12-1];
+
+    assign out = m[address];
+
+    always @(posedge clock) begin
+        if (load) m[address] = in;
+    end
+endmodule
