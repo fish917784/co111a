@@ -16,14 +16,13 @@ module Keyboard(output[15:0] out);
 endmodule
 
 module Memory(input[15:0] in, input[14:0] address, input clock, load, output[15:0] out);
-    wire[15:0] o0, o1, o2, o3;
+    wire[15:0] o0, o1, o2;
 
     DMux4Way g0(load, address[14:13], r0, r1, r2, r3);
     Or g1(r0, r1, rload);
     RAM16K ram16k(in, address[13:0], clock, rload, o0);
     RAM8K screen(in, address[12:0], clock, r2, o1);
     Keyboard keyboard(o2);
-    Mux16 g2(o1, o2, address[13], o3);
-    Mux16 g3(o0, o3, address[14], out);
+    Mux4Way16 g2(o0, o0, o1, o2, address[14:13], out);
 endmodule
 
