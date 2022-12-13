@@ -93,3 +93,23 @@ module RAM4K(input[15:0] in, input[11:0] address, input clock, load, output[15:0
         if (load) m[address] = in;
     end
 endmodule
+
+module RAM16K(input[15:0] in, input[13:0] address, input clock, load, output[15:0] out);
+    reg[15:0] m[0:2**14-1];
+
+    assign out = m[address];
+
+    always @(posedge clock) begin
+        if (load) m[address] = in;
+    end
+endmodule
+
+module PC(input[15:0] in, input load, inc, reset, clock, output[15:0] out);
+    wire[15:0] inco, o, to, oq;
+
+    Inc16 g0(out, inco);
+    Mux16 g1(out, inco, inc, o);
+    Mux16 g2(o, in, load, to);
+    Mux16 g3(to, 0, reset, oq);
+    Register g4(oq, clock, 1, out);
+endmodule
