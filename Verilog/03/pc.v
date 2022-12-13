@@ -2,14 +2,14 @@
 
 module PC_test;
 reg[15:0] in;
-reg load, inc, reset, clock;
+reg clock, load, inc, reset;
 wire[15:0] out;
 
-PC g(in, load, inc, reset, clock, out);
+PC g(in, clock, load, inc, reset, out);
 
 initial begin
     clock=0;
-    $monitor("%4dns in=%d load=%d inc=%d reset=%d clock=%d out=%d", $stime, in, load, inc, reset, clock, out);
+    $monitor("%4dns in=%d clock=%d load=%d inc=%d reset=%d out=%d", $stime, in, clock, load, inc, reset, out);
     inc=0;
     load=0;
     reset=0;

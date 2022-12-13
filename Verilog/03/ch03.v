@@ -104,7 +104,7 @@ module RAM16K(input[15:0] in, input[13:0] address, input clock, load, output[15:
     end
 endmodule
 
-module PC(input[15:0] in, input load, inc, reset, clock, output[15:0] out);
+module PC(input[15:0] in, input clock, load, inc, reset, output[15:0] out);
     wire[15:0] inco, o, to, oq;
 
     Inc16 g0(out, inco);
