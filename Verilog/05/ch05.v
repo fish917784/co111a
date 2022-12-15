@@ -41,12 +41,13 @@ module CPU(input[15:0] inM, I, input clock, reset, output[15:0] outM, output wri
     Or g3(ALUtoAr, isA, Arload);
 
     Register A(ArIN, clock, Arload, MUXtwoIN);
+    assign addressM = MUXtwoIN[14:0];
     Mux16 g4(MUXtwoIN, inM, I[12], AluY);
     And g5(I[15], I[4], Dload);
     Register D(ALUback, Dload, AluX);
 //I[11:6]=zx,nx,zy,ny,f,no
     ALU alu(AluX, AluY, I[11], I[10], I[9], I[8], I[7], I[6], ALUback, zrout, ngout);
-
+    assign outM = ALUback;
     PC pc(MUXtwoIN, pcload, reset, 1, pcout);
     assign pc = pcout[14:0];
 
@@ -62,3 +63,4 @@ module CPU(input[15:0] inM, I, input clock, reset, output[15:0] outM, output wri
     Or8Way g14(JMP, EQ, LT, GT, 0, 0, 0, 0, pcload0);
     And g15(I[15], pcload0, pc);
     And g16(I[3], I[15], writeM);
+endmodule

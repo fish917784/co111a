@@ -13,11 +13,11 @@ begin
 	$monitor("%4dns in=%d clock=%d out=%d", $stime, in, clock, out);
 end
 
-always #2 begin
+always #1 begin
 	clock=~clock;
 end
 
-always #4 begin
+always #2 begin
 	in=in+1;
 end
 
