@@ -26,3 +26,39 @@ module Memory(input[15:0] in, input[14:0] address, input clock, load, output[15:
     Mux4Way16 g2(o0, o0, o1, o2, address[14:13], out);
 endmodule
 
+module ROM32K(input[14:0] address, output[15:0] out);
+    reg[15:0] m[0:2**15-1];
+    assign out = m[address];
+endmodule
+
+module CPU(input[15:0] inM, I, input clock, reset, output[15:0] outM, output writeM, output[14:0] addressM, pc);
+    wire[15:0] ALUback, ArIN, MUXtwoIN, AluY, AluX;
+
+//指令預處理
+    Mux16 g0(I, ALUback, I[15], ArIN);
+    And g1(I[15], I[5], ALUtoAr);
+    Not g2(I[15], isA);
+    Or g3(ALUtoAr, isA, Arload);
+
+    Register A(ArIN, clock, Arload, MUXtwoIN);
+    Mux16 g4(MUXtwoIN, inM, I[12], AluY);
+    And g5(I[15], I[4], Dload);
+    Register D(ALUback, Dload, AluX);
+//I[11:6]=zx,nx,zy,ny,f,no
+    ALU alu(AluX, AluY, I[11], I[10], I[9], I[8], I[7], I[6], ALUback, zrout, ngout);
+
+    PC pc(MUXtwoIN, pcload, reset, 1, pcout);
+    assign pc = pcout[14:0];
+
+//I[2]=j2,I[1]=j1,I[0]=j0
+    And g6(I[2], I[1], jmp0);
+    And g7(jmp0, I[0], JMP);
+    And g8(I[1], zrout, EQ);
+    And g9(I[2], ngout, LT);
+    Not g10(ngout, nngout);
+    And g11(nngout, I[0], GT0);
+    Not g12(zrout, nzrout);
+    And g13(nzrout, GT0, GT);
+    Or8Way g14(JMP, EQ, LT, GT, 0, 0, 0, 0, pcload0);
+    And g15(I[15], pcload0, pc);
+    And g16(I[3], I[15], writeM);

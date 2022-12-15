@@ -13,19 +13,16 @@ begin
     load=0;
     in=0;
     $monitor("%4dns in=%d clock=%d load=%d out=%d", $stime, in, clock, load, out);
+    #4 in=10;
+    #2 load=1;
+    #2 load=0;
+    #2 in=100;
+    #6 load=1;
+    #2 load=0;
+    #4 $finish;
 end
 
-always #2 begin
+always #1 begin
     clock=~clock;
 end
-
-always #6 begin
-    in=in+10;
-end
-
-always #10 begin
-    load=load+1;
-end
-
-initial #60 $finish;
 endmodule
