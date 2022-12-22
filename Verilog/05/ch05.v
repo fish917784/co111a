@@ -66,3 +66,12 @@ module CPU(input[15:0] inM, I, input clock, reset, output[15:0] outM, output wri
     PC pc0(MUXtwoIN, clock, pcload, 1, reset, pcout);
     assign pc = pcout[14:0];
 endmodule
+
+module Computer(input clock, reset);
+    wire[15:0] inM, outM, I;
+    wire[14:0] addressM, pc;
+
+    Memory ram(inM, addressM, !clock, loadM, outM);
+    ROM32K rom(pc, I);
+    CPU cpu(outM, I, clock, reset, inM, loadM, addressM, pc);
+endmodule
