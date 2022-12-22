@@ -12,5 +12,5 @@ vvp and
 
 測試檔皆為參考老師測試檔並加以修改完成。  
 大部分元件是參考我的[期中作業](https://github.com/dallas145/co111a)的nand2tetris部分，  
-部分較困難的元件寫法則是參考自老師的[co/02-nand2tetris](https://gitlab.com/cccnqu111/co/-/tree/master/verilog/02-nand2tetris)  
+部分較困難的元件寫法則是參考自老師的[co/02-nand2tetris](https://gitlab.com/cccnqu111/co/-/tree/master/verilog/02-nand2tetris)。  
 05資料夾中的 `sum.asm` 及 `sum.hack` 是直接搬運自[co/02-nand2tetris](https://gitlab.com/cccnqu111/co/-/tree/master/verilog/02-nand2tetris)。
