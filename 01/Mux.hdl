@@ -15,12 +15,8 @@ CHIP Mux {
 
     PARTS:
     // Put your code here:
-    Nand(a=sel,b=sel,out=notsel);
-    Nand(a=a,b=notsel,out=anotsel);
-    Nand(a=anotsel,b=anotsel,out=notanotsel);
-    Nand(a=b,b=sel,out=notbsel);
-    Nand(a=notbsel,b=notbsel,out=bsel);
-    Nand(a=notanotsel,b=notanotsel,out=nanotsel);
-    Nand(a=bsel,b=bsel,out=nbsel);
-    Nand(a=nanotsel,b=nbsel,out=out);
+    Nand(a=sel,b=sel,out=Sbar);
+    Nand(a=a,b=Sbar,out=y1);
+    Nand(a=b,b=sel,out=y2);
+    Nand(a=y1,b=y2,out=out);
 }
