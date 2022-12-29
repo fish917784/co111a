@@ -19,11 +19,45 @@ CHIP Mux8Way16 {
 
     PARTS:
     // Put your code here:
-    Mux16(a=a,b=b,sel=sel[0],out=mab);
-    Mux16(a=c,b=d,sel=sel[0],out=mcd);
-    Mux16(a=e,b=f,sel=sel[0],out=mef);
-    Mux16(a=g,b=h,sel=sel[0],out=mgh);
-    Mux16(a=mab,b=mcd,sel=sel[1],out=mabcd);
-    Mux16(a=mef,b=mgh,sel=sel[1],out=mefgh);
-    Mux16(a=mabcd,b=mefgh,sel=sel[2],out=out);
+    Nand(a=in,b=sel[0],out=inNandsel);
+    Nand(a=inNandsel,b=inNandsel,out=m0);
+    Nand(a=sel[0],b=sel[0],out=notsel);
+    Nand(a=notsel,b=in,out=innotsel);
+    Nand(a=innotsel,b=innotsel,out=m1);
+
+    Nand(a=m0,b=sel[1],out=inNandsel1);
+    Nand(a=inNandsel1,b=inNandsel1,out=mm3);
+    Nand(a=sel[1],b=sel[1],out=notsel1);
+    Nand(a=notsel1,b=m0,out=innotsel1);
+    Nand(a=innotsel1,b=innotsel1,out=mm1);
+
+    Nand(a=m1,b=sel[1],out=inNandsel2);
+    Nand(a=inNandsel2,b=inNandsel2,out=mm2);
+    Nand(a=sel[1],b=sel[1],out=notsel2);
+    Nand(a=notsel2,b=m1,out=innotsel2);
+    Nand(a=innotsel2,b=innotsel2,out=mm0);
+
+    Nand(a=mm0,b=sel[2],out=inNandsel3);
+    Nand(a=inNandsel3,b=inNandsel3,out=e);
+    Nand(a=sel[2],b=sel[2],out=notsel3);
+    Nand(a=notsel3,b=mm0,out=innotsel3);
+    Nand(a=innotsel3,b=innotsel3,out=a);
+
+    Nand(a=mm1,b=sel[2],out=inNandsel4);
+    Nand(a=inNandsel4,b=inNandsel4,out=f);
+    Nand(a=sel[2],b=sel[2],out=notsel4);
+    Nand(a=notsel4,b=mm1,out=innotsel4);
+    Nand(a=innotsel4,b=innotsel4,out=b);
+
+    Nand(a=mm2,b=sel[2],out=inNandsel5);
+    Nand(a=inNandsel5,b=inNandsel5,out=g);
+    Nand(a=sel[2],b=sel[2],out=notsel5);
+    Nand(a=notsel5,b=mm2,out=innotsel5);
+    Nand(a=innotsel5,b=innotsel5,out=c);
+
+    Nand(a=mm3,b=sel[2],out=inNandsel6);
+    Nand(a=inNandsel6,b=inNandsel6,out=h);
+    Nand(a=sel[2],b=sel[2],out=notsel6);
+    Nand(a=notsel6,b=mm3,out=innotsel6);
+    Nand(a=innotsel6,b=innotsel6,out=d);
 }
